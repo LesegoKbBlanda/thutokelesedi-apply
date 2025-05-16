@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Application – Thuto Ke Lesedi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Define TKL Color Palette as CSS Variables */
+    :root {
+      --tkl-blue-dark: #243e6c;
+      --tkl-blue-dark-rgb: 36, 62, 108;
+      --tkl-blue-medium: #4f97d1;
+      --tkl-blue-medium-rgb: 79, 151, 209;
+      --tkl-gold: #f6cf5a;
+      --tkl-gold-rgb: 246, 207, 90;
+      --tkl-black: #000000;
+      --tkl-white: #ffffff;
+      --tkl-light-bg: #f8f9fa; /* Base light background */
+      --tkl-gradient-start: #eef6fc; /* Lighter shade of blue for gradient */
+      --tkl-gradient-end: #f8f9fa;   /* Standard light bg for gradient end */
+      --tkl-dark-gray: #343a40; /* Bootstrap's dark gray */
+      --tkl-medium-gray: #6c757d; /* Bootstrap's medium gray */
+      --tkl-light-gray: #e9ecef;
+      --tkl-success: #198754;
+      --tkl-danger: #dc3545;
+      --tkl-info: #0dcaf0;
+    }
+
+    body {
+      background-image: linear-gradient(135deg, var(--tkl-gradient-start) 0%, var(--tkl-gradient-end) 100%);
+      font-family: 'Inter', sans-serif;
+      color: var(--tkl-dark-gray);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      background-color: var(--tkl-white);
+      border-radius: 0.75rem;
+      box-shadow: 0 0.5rem 1.5rem rgba(var(--tkl-blue-dark-rgb), 0.1);
+      border: 1px solid var(--tkl-light-gray);
+    }
+
+    .form-header {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--tkl-gold);
+    }
+
+    .form-header img.logo {
+      max-width: 160px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .form-header h1 {
+      color: var(--tkl-blue-dark);
+      font-weight: 700;
+      font-size: 2.25rem;
+    }
+
+    .section-title {
+      color: var(--tkl-gold);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 1.85rem;
+      text-shadow: 1px 1px 2px rgba(var(--tkl-blue-dark-rgb), 0.15);
+    }
+
+    .roles-gallery { /* Styles for roles gallery if you re-add it */
+      margin-bottom: 2.5rem;
+    }
+    .roles-gallery .card {
+      border: 1px solid var(--tkl-light-gray);
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      border-radius: 0.6rem;
+      overflow: hidden;
+    }
+    .roles-gallery .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0.75rem 1.5rem rgba(var(--tkl-blue-medium-rgb), 0.2) !important;
+    }
+    .roles-gallery .card .card-role-color-block {
+      background-color: var(--tkl-blue-medium);
+      color: var(--tkl-white);
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.3;
+      transition: background-color 0.2s ease;
+    }
+    .roles-gallery .card:hover .card-role-color-block {
+        background-color: var(--tkl-blue-dark);
+    }
+    .roles-gallery .card-body {
+      padding: 1rem 1.25rem;
+      text-align: center;
+      background-color: var(--tkl-white);
+    }
+    .roles-gallery .card-title {
+      color: var(--tkl-blue-dark);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 0;
+    }
+
+    .input-group .input-group-text {
+        background-color: var(--tkl-light-gray);
+        border-color: var(--tkl-light-gray);
+        color: var(--tkl-blue-medium);
+        min-width: 45px;
+        justify-content: center;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--tkl-blue-medium);
+      box-shadow: 0 0 0 0.25rem rgba(var(--tkl-blue-medium-rgb), 0.25);
+    }
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+        color: var(--tkl-medium-gray);
+    }
+
+    .btn-custom-submit {
+        background-color: var(--tkl-gold);
+        border: none;
+        color: var(--tkl-blue-dark);
+        font-weight: 700;
+        padding: 0.85rem 1.5rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(var(--tkl-gold-rgb), 0.3),
+                    0 0 15px rgba(var(--tkl-gold-rgb), 0.2);
+        transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        text-transform: uppercase;
+        letter-spacing: 0.75px;
+    }
+    .btn-custom-submit:hover, .btn-custom-submit:focus {
+        background-color: #e0b84f;
+        color: var(--tkl-blue-dark);
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 6px 15px rgba(var(--tkl-gold-rgb), 0.35),
+                    0 0 25px rgba(var(--tkl-gold-rgb), 0.3);
+    }
+     .btn-custom-submit:active {
+        transform: translateY(0px) scale(1);
+        box-shadow: 0 2px 5px rgba(var(--tkl-gold-rgb), 0.25),
+                    0 0 10px rgba(var(--tkl-gold-rgb), 0.2);
+    }
+
+    #msg.alert {
+        border-radius: 0.5rem;
+        font-weight: 500;
+    }
+    /* Disclaimer Modal Styling */
+    .modal-header {
+        background-color: var(--tkl-blue-dark);
+        color: var(--tkl-gold);
+        border-bottom: 2px solid var(--tkl-gold);
+    }
+    .modal-header .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%); /* Make close button white/gold */
+    }
+    .modal-body {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .modal-body strong {
+        color: var(--tkl-blue-dark);
+    }
+    .modal-body ul {
+        padding-left: 20px;
+    }
+    .modal-body ul li {
+        margin-bottom: 0.5rem;
+    }
+    .modal-footer {
+        border-top: 1px solid var(--tkl-light-gray);
+    }
+    .btn-acknowledge {
+        background-color: var(--tkl-gold);
+        color: var(--tkl-blue-dark);
+        font-weight: 600;
+        border: none;
+    }
+    .btn-acknowledge:hover {
+        background-color: #e0b84f; /* Darker gold */
+        color: var(--tkl-blue-dark);
+    }
+
+    hr.section-divider { /* Style for the divider if you re-add it */
+        border-top: 1px solid var(--tkl-light-gray);
+        margin-top: 2.5rem;
+        margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="disclaimerModalLabel"><i class="fas fa-info-circle me-2"></i>Important Information for Applicants</h5>
+          </div>
+        <div class="modal-body">
+          <p>Thank you for your interest in joining <strong>Thuto Ke Lesedi!</strong></p>
+          <p>Please be aware that all positions listed are <strong>volunteer roles</strong>. While these are non-salaried opportunities, we are excited to offer our dedicated volunteers a unique package of benefits designed to support your growth and recognize your contribution:</p>
+          <ul>
+            <li><strong>Skill Enhancement & Exposure:</strong> Gain hands-on experience with various technological tools and real-world projects.</li>
+            <li><strong>Portfolio Building:</strong> Develop a strong portfolio showcasing your work and impact.</li>
+            <li><strong>Community Contribution:</strong> Make a tangible difference and contribute to meaningful community initiatives.</li>
+            <li><strong>Networking Opportunities:</strong> Connect with professionals and like-minded individuals.</li>
+            <li><strong>Future Considerations:</strong> We are actively exploring non-monetary incentives for dedicated long-term volunteers, which may include future equity or share options in our ventures, alongside other forms of recognition.</li>
+          </ul>
+          <p class="mt-3">By clicking 'Acknowledge & Continue', you confirm that you understand the volunteer nature of these roles and are interested in the non-monetary benefits and opportunities described.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-acknowledge px-4" data-bs-dismiss="modal">Acknowledge & Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container p-4 p-md-5 my-5">
+    <header class="form-header">
+      <img src="logo1.png" alt="Thuto Ke Lesedi Logo" class="logo"
+           onerror="this.onerror=null; this.src='https://placehold.co/160x90/243e6c/ffffff?text=TKL+Logo&font=inter'; this.alt='Thuto Ke Lesedi Placeholder Logo';" >
+      <h1>Join Our Volunteer Team!</h1>
+    </header>
+
+    <section class="application-form-section">
+      <h2 class="text-center section-title mb-4">Ready to Apply?</h2>
+      <form id="appForm">
+        <div class="mb-4">
+          <label for="fullName" class="form-label">Full Name</label>
+          <div class="input-group"><span class="input-group-text"><i class="fas fa-user"></i></span><input type="text" class="form-control" id="fullName" name="fullName" placeholder="Your Full Name" required></div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="form-label">Email Address</label>
+          <div class="input-group"><span class="input-group-text"><i class="fas fa-envelope"></i></span><input type="email" class="form-control" id="email" name="email" placeholder="your.email@example.com" required></div>
+        </div>
+        <div class="mb-4">
+          <label for="position" class="form-label">Position Applying For</label>
+          <div class="input-group"><span class="input-group-text"><i class="fas fa-briefcase"></i></span><select class="form-select" id="position" name="position" required><option value="" disabled selected>— Select a Position —</option><option>Business Analyst</option><option>Business Developer</option><option>Content Creator</option><option>Social Media Manager</option><option>Software Developer</option><option>Systems Analyst</option></select></div>
+        </div>
+        <div class="mb-4">
+          <label for="linkedin" class="form-label">LinkedIn Profile URL (Optional)</label>
+          <div class="input-group"><span class="input-group-text"><i class="fab fa-linkedin"></i></span><input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile"></div>
+        </div>
+        <div class="mb-4">
+          <label for="resume" class="form-label">Resume Link</label>
+          <div class="input-group"><span class="input-group-text"><i class="fas fa-file-alt"></i></span><input type="url" class="form-control" id="resume" name="resume" placeholder="Public link to your resume (e.g., Google Drive)" required></div>
+        </div>
+        <div class="mb-4">
+          <label for="coverLetter" class="form-label">Cover Letter / Tell Us About Yourself</label>
+          <textarea class="form-control" id="coverLetter" name="coverLetter" rows="5" placeholder="Why are you interested in volunteering with us? What skills can you bring?" required></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="availability" class="form-label">Availability (Optional)</label>
+           <div class="input-group"><span class="input-group-text"><i class="fas fa-clock"></i></span><input type="text" class="form-control" id="availability" name="availability" placeholder="e.g., 10 hours/week, evenings, starting June"></div>
+        </div>
+        <div class="mb-4">
+          <label for="skills" class="form-label">Key Skills / Expertise (Optional)</label>
+          <div class="input-group"><span class="input-group-text"><i class="fas fa-cogs"></i></span><input type="text" class="form-control" id="skills" name="skills" placeholder="e.g., Python, Graphic Design, Event Planning"></div>
+        </div>
+        <button type="submit" class="btn btn-custom-submit w-100 py-3 mt-3">Submit Your Application</button>
+      </form>
+      <div id="msg" class="alert mt-4" role="alert" style="display: none;"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        console.log("HTML: DOMContentLoaded - Attempting to initialize and show disclaimer modal.");
+        var disclaimerModalElement = document.getElementById('disclaimerModal');
+        if (disclaimerModalElement) {
+          var disclaimerModalInstance = new bootstrap.Modal(disclaimerModalElement);
+          if (disclaimerModalInstance) {
+            disclaimerModalInstance.show();
+            console.log("HTML: Disclaimer modal instance created and shown.");
+          } else {
+            console.error("HTML: Failed to create Bootstrap Modal instance.");
+          }
+        } else {
+          console.warn("HTML: Disclaimer modal element with ID 'disclaimerModal' not found.");
+        }
+      } catch (e) {
+        console.error("HTML: Error initializing or showing disclaimer modal:", e);
+      }
+    });
+  </script>
+  
+  <script>
+    // IMPORTANT: Replace this with your actual Apps Script web app URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDUGiRbnaPkOCjwu-cgbnipdCm4DzjNoPEqDtb8jvYYkvOB5CEpDLNefBKNoBtWXnS/exec'; // *** REPLACE THIS URL ***
+
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("Embedded JS: DOMContentLoaded event fired. Initializing form submission logic.");
+      // The disclaimer modal is initialized and shown by the inline script above.
+      // This part of the script focuses SOLELY on form submission logic.
+
+      const appForm = document.getElementById('appForm');
+      if (!appForm) {
+        console.error("Embedded JS: Application form with ID 'appForm' not found. Form submission will not work.");
+        return; // Exit if the form isn't found
+      }
+
+      const submitButton = appForm.querySelector('button[type="submit"]');
+      const msgDiv = document.getElementById('msg');
+
+      if (!submitButton) {
+        console.error("Embedded JS: Submit button within the form 'appForm' not found.");
+      }
+      if (!msgDiv) {
+        console.error("Embedded JS: Message display element with ID 'msg' not found.");
+      }
+
+      appForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        console.log("Embedded JS: Form submission initiated.");
+
+        if (!submitButton || !msgDiv) {
+            console.error("Embedded JS: Submit button or message div is missing at submission time. Cannot proceed.");
+            alert("A page error occurred (submit elements missing). Please try refreshing.");
+            return;
+        }
+
+        const formData = new FormData(appForm);
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+
+        const applicantEmail = data.email ? data.email.trim().toLowerCase() : "";
+        const applicantPosition = data.position;
+
+        if (!applicantEmail) {
+          msgDiv.textContent = 'Email address is required.';
+          msgDiv.className = 'alert alert-danger mt-4';
+          msgDiv.style.display = 'block';
+          console.log("Embedded JS: Submission blocked - Email required.");
+          return;
+        }
+        if (!applicantPosition) {
+          msgDiv.textContent = 'Please select a position you are applying for.';
+          msgDiv.className = 'alert alert-danger mt-4';
+          msgDiv.style.display = 'block';
+          console.log("Embedded JS: Submission blocked - Position required.");
+          return;
+        }
+
+        const applicationKey = `applied_${applicantEmail}_${applicantPosition.replace(/\s+/g, '-')}`;
+
+        try {
+          if (localStorage.getItem(applicationKey)) {
+            msgDiv.textContent = `You have already applied for the position of "${applicantPosition}" with this email address. You can apply for different positions if available.`;
+            msgDiv.className = 'alert alert-info mt-4';
+            msgDiv.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Submit Your Application';
+            console.log("Embedded JS: Submission blocked - Duplicate application.");
+            return;
+          }
+        } catch (storageError) {
+            console.warn("Embedded JS: localStorage is not available or access is denied. Duplicate application check will be skipped.", storageError);
+        }
+
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
+        msgDiv.style.display = 'none';
+        msgDiv.className = 'alert mt-4';
+        console.log("Embedded JS: Submitting data to SCRIPT_URL:", SCRIPT_URL);
+
+        fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          }
+        })
+        .then(response => {
+          console.log("Embedded JS: Received response from server.");
+          return response.json().then(jsonResponse => {
+              if (!response.ok) {
+                  console.error("Embedded JS: Server response not OK.", response, jsonResponse);
+                  throw new Error(jsonResponse.error || `Server error! Status: ${response.status}`);
+              }
+              console.log("Embedded JS: Server response OK, parsed JSON:", jsonResponse);
+              return jsonResponse;
+          }).catch(parsingError => {
+              console.error("Embedded JS: Response parsing error or non-OK server response:", parsingError, "Status:", response.status);
+              throw new Error(`Request failed (status ${response.status}). The server's response might not be valid JSON or indicated an error.`);
+          });
+        })
+        .then(res => {
+          if (res.result === 'success') {
+            msgDiv.textContent = res.message || 'Thanks! Your application has been submitted successfully. A confirmation email will be sent shortly.';
+            msgDiv.className = 'alert alert-success mt-4';
+            appForm.reset();
+            try {
+                localStorage.setItem(applicationKey, 'true');
+                console.log("Embedded JS: Application status saved to localStorage.");
+            } catch (storageError) {
+                console.warn("Embedded JS: localStorage is not available. Could not save application status.", storageError);
+            }
+          } else {
+            msgDiv.textContent = `Oops—something went wrong. ${res.error ? (res.error.message || res.error) : 'Please try again.'}`;
+            msgDiv.className = 'alert alert-danger mt-4';
+            console.error('Embedded JS: Error from Apps Script:', res.error);
+          }
+        })
+        .catch(error => {
+          msgDiv.textContent = 'An error occurred: ' + error.message + ' Please check your internet connection and try again. If the issue persists, contact support.';
+          msgDiv.className = 'alert alert-danger mt-4';
+          console.error('Embedded JS: Fetch Error:', error);
+        })
+        .finally(() => {
+          msgDiv.style.display = 'block';
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Submit Your Application';
+          console.log("Embedded JS: Form submission process finalized.");
+        });
+      });
+    });
+  </script>
+</body>
+</html>
